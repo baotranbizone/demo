@@ -32,7 +32,7 @@
               },
               "schema": [],
               "linkedService": {
-                "name": "35fa9114_6e48_4359_9cef_2b4dfc7f58e2",
+                "name": "5224c668_7f83_461d_aa7d_5c6489e89133",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -59,7 +59,7 @@
               },
               "schema": [],
               "linkedService": {
-                "name": "2a1fe1fb_ff19_47ac_816f_875a2770b88e",
+                "name": "6fbc4359_7e4a_4145_b71a_742e34536479",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -98,11 +98,8 @@
       {
         "type": "TridentNotebook",
         "typeProperties": {
-          "notebookId": "a3f73596-d59c-46e6-8817-363e4f4607bf",
-          "workspaceId": {
-            "value": "@pipeline().libraryVariables.VariablesLibrary_WorkspaceID",
-            "type": "Expression"
-          }
+          "notebookId": "a7a47c43-932e-4863-8154-dbf4ee8d1770",
+          "workspaceId": "2e6f0c95-ff58-4732-8c60-ed4006c3b317"
         },
         "policy": {
           "timeout": "0.12:00:00",
