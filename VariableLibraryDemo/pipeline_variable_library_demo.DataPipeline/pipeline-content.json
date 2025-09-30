@@ -99,10 +99,7 @@
         "type": "TridentNotebook",
         "typeProperties": {
           "notebookId": "a7a47c43-932e-4863-8154-dbf4ee8d1770",
-          "workspaceId": {
-            "value": "@pipeline().libraryVariables.VariablesLibrary_WorkspaceID",
-            "type": "Expression"
-          }
+          "workspaceId": "2e6f0c95-ff58-4732-8c60-ed4006c3b317"
         },
         "policy": {
           "timeout": "0.12:00:00",
