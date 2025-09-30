@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/variables/1.0.0/schema.json",
+  "variables": [
+    {
+      "name": "LakehouseID",
+      "note": "",
+      "type": "String",
+      "value": "8aad425d-0712-437a-b24f-f3f1bd6722a6"
+    },
+    {
+      "name": "WorkspaceID",
+      "note": "",
+      "type": "String",
+      "value": "2e6f0c95-ff58-4732-8c60-ed4006c3b317"
+    },
+    {
+      "name": "NotebookID",
+      "note": "",
+      "type": "String",
+      "value": "a7a47c43-932e-4863-8154-dbf4ee8d1770"
+    },
+    {
+      "name": "FileName",
+      "note": "",
+      "type": "String",
+      "value": "customers_dev.csv"
+    },
+    {
+      "name": "ShortcutWSID",
+      "note": "",
+      "type": "String",
+      "value": "564eddec-3159-4b53-8341-35096765deac\n\n"
+    },
+    {
+      "name": "ShortcutLHID",
+      "note": "",
+      "type": "String",
+      "value": "509e9def-f0d7-47e3-a1b5-51d9f96f3e6c\n\n"
+    },
+    {
+      "name": "TargetItemID",
+      "note": "",
+      "type": "String",
+      "value": "ed317608-524d-40ca-a4cc-1e0cc9eed98e"
+    }
+  ]
+}

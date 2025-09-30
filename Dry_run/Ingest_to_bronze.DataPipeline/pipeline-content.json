@@ -1,0 +1,119 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "ForEachTable",
+        "type": "ForEach",
+        "dependsOn": [],
+        "typeProperties": {
+          "items": {
+            "value": "@pipeline().parameters.tables",
+            "type": "Expression"
+          },
+          "isSequential": true,
+          "activities": [
+            {
+              "name": "Ingest Data",
+              "type": "Copy",
+              "dependsOn": [],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "typeProperties": {
+                "source": {
+                  "type": "AzureSqlSource",
+                  "sqlReaderQuery": {
+                    "value": "SELECT GETDATE() as inserted_ts, *\nFROM dbo.@{item()}",
+                    "type": "Expression"
+                  },
+                  "queryTimeout": "02:00:00",
+                  "partitionOption": "None",
+                  "datasetSettings": {
+                    "annotations": [],
+                    "type": "AzureSqlTable",
+                    "schema": [],
+                    "typeProperties": {
+                      "schema": "dbo",
+                      "table": {
+                        "value": "@item()",
+                        "type": "Expression"
+                      },
+                      "database": "sapb1"
+                    },
+                    "externalReferences": {
+                      "connection": "195f070f-f4c0-4138-a0d5-a80279fbc9ac"
+                    }
+                  }
+                },
+                "sink": {
+                  "type": "LakehouseTableSink",
+                  "tableActionOption": "Append",
+                  "partitionOption": "None",
+                  "applyVOrder": true,
+                  "datasetSettings": {
+                    "annotations": [],
+                    "linkedService": {
+                      "name": "712ed8de_6eb7_4939_a5fc_52ed4171d703",
+                      "properties": {
+                        "annotations": [],
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "workspaceId": "@pipeline().libraryVariables.WorkspaceID",
+                          "artifactId": "@pipeline().libraryVariables.LakehouseID",
+                          "rootFolder": "Tables"
+                        }
+                      }
+                    },
+                    "type": "LakehouseTable",
+                    "schema": [],
+                    "typeProperties": {
+                      "schema": "bronze",
+                      "table": {
+                        "value": "@item()",
+                        "type": "Expression"
+                      }
+                    }
+                  }
+                },
+                "enableStaging": false,
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parameters": {
+      "tables": {
+        "type": "array",
+        "defaultValue": [
+          "IGE1",
+          "OIGE"
+        ]
+      }
+    },
+    "libraryVariables": {
+      "LakehouseID": {
+        "type": "String",
+        "variableName": "SourceLakehouseID",
+        "libraryName": "TestVariables"
+      },
+      "WorkspaceID": {
+        "type": "String",
+        "variableName": "SourceWorkspaceID",
+        "libraryName": "TestVariables"
+      }
+    }
+  }
+}

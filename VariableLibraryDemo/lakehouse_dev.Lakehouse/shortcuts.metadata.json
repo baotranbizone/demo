@@ -1,0 +1,26 @@
+[
+  {
+    "name": "silver",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/silver",
+        "itemId": "$(/**/VariablesLibrary/TargetItemID)",
+        "workspaceId": "$(/**/VariablesLibrary/WorkspaceID)"
+      }
+    }
+  },
+  {
+    "name": "data",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Files/data",
+        "itemId": "509e9def-f0d7-47e3-a1b5-51d9f96f3e6c",
+        "workspaceId": "564eddec-3159-4b53-8341-35096765deac"
+      }
+    }
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "bronze",
+    "path": "/Files",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/bronze",
+        "itemId": "$(/**/TestVariables/TargetLakehouseID)",
+        "workspaceId": "$(/**/TestVariables/TargetWorkspaceID)"
+      }
+    }
+  }
+]

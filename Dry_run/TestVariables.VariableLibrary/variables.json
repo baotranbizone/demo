@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/variables/1.0.0/schema.json",
+  "variables": [
+    {
+      "name": "SourceLakehouseID",
+      "note": "",
+      "type": "String",
+      "value": "test_lakehouse"
+    },
+    {
+      "name": "SourceWorkspaceID",
+      "note": "",
+      "type": "String",
+      "value": "848043c6-3903-45b0-82de-3dcb0f24cc09"
+    },
+    {
+      "name": "TargetWorkspaceID",
+      "note": "",
+      "type": "String",
+      "value": "72b7f694-43ec-454b-a68f-d6e7bf1e00b1"
+    },
+    {
+      "name": "TargetLakehouseID",
+      "note": "",
+      "type": "String",
+      "value": "b3be5ce7-c06c-4a20-819b-390756ee1f60"
+    }
+  ]
+}
