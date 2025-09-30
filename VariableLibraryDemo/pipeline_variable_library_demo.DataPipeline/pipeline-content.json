@@ -32,7 +32,7 @@
               },
               "schema": [],
               "linkedService": {
-                "name": "a273da70_a16b_4fc4_b5b0_ed9d9bd88fd4",
+                "name": "5224c668_7f83_461d_aa7d_5c6489e89133",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -59,7 +59,7 @@
               },
               "schema": [],
               "linkedService": {
-                "name": "080cf609_1ddb_4faf_b9b7_8d146ffb0310",
+                "name": "6fbc4359_7e4a_4145_b71a_742e34536479",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -98,10 +98,7 @@
       {
         "type": "TridentNotebook",
         "typeProperties": {
-          "notebookId": {
-            "value": "@pipeline().libraryVariables.VariablesLibrary_NotebookID",
-            "type": "Expression"
-          },
+          "notebookId": "a7a47c43-932e-4863-8154-dbf4ee8d1770",
           "workspaceId": {
             "value": "@pipeline().libraryVariables.VariablesLibrary_WorkspaceID",
             "type": "Expression"
@@ -154,12 +151,14 @@
         "typeProperties": {
           "parameters": {},
           "waitOnCompletion": true,
-          "workspaceId": "564eddec-3159-4b53-8341-35096765deac",
-          "pipelineId": "f0f1e45a-bf2c-4462-8a13-544a75f5add5",
+          "workspaceId": {
+            "value": "@pipeline().libraryVariables.VariablesLibrary_WorkspaceID",
+            "type": "Expression"
+          },
           "operationType": "InvokeFabricPipeline"
         },
         "externalReferences": {
-          "connection": "d8975485-3d1f-4cf0-803c-2bb5ac009c9f"
+          "connection": "fc8727e6-71a5-4c97-92d8-a11bc7b66d7f"
         },
         "policy": {
           "timeout": "0.12:00:00",
@@ -169,6 +168,8 @@
           "secureOutput": false
         },
         "name": "Invoke pipeline2",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Invoke pipeline1",
