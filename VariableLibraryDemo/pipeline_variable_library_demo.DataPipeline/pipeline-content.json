@@ -1,0 +1,205 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "Landing/Customers",
+                  "fileName": {
+                    "value": "@pipeline().libraryVariables.VariablesLibrary_FileName",
+                    "type": "Expression"
+                  }
+                },
+                "columnDelimiter": ",",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": true
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "a273da70_a16b_4fc4_b5b0_ed9d9bd88fd4",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "@pipeline().libraryVariables.VariablesLibrary_LakehouseID",
+                    "workspaceId": "@pipeline().libraryVariables.VariablesLibrary_WorkspaceID",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "partitionOption": "None",
+            "applyVOrder": true,
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "bronze",
+                "table": "customer"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "080cf609_1ddb_4faf_b9b7_8d146ffb0310",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "@pipeline().libraryVariables.VariablesLibrary_LakehouseID",
+                    "workspaceId": "@pipeline().libraryVariables.VariablesLibrary_WorkspaceID",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy data",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": {
+            "value": "@pipeline().libraryVariables.VariablesLibrary_NotebookID",
+            "type": "Expression"
+          },
+          "workspaceId": {
+            "value": "@pipeline().libraryVariables.VariablesLibrary_WorkspaceID",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "notebook_variable_library_demo",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "Copy data",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ExecutePipeline",
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "fa055e4e-0acf-82d2-4825-35155ca2d2e4",
+            "type": "PipelineReference"
+          },
+          "parameters": {},
+          "waitOnCompletion": true
+        },
+        "policy": {
+          "secureInput": false
+        },
+        "name": "Invoke pipeline1",
+        "dependsOn": [
+          {
+            "activity": "notebook_variable_library_demo",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "InvokePipeline",
+        "typeProperties": {
+          "parameters": {},
+          "waitOnCompletion": true,
+          "workspaceId": "564eddec-3159-4b53-8341-35096765deac",
+          "pipelineId": "f0f1e45a-bf2c-4462-8a13-544a75f5add5",
+          "operationType": "InvokeFabricPipeline"
+        },
+        "externalReferences": {
+          "connection": "d8975485-3d1f-4cf0-803c-2bb5ac009c9f"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Invoke pipeline2",
+        "dependsOn": [
+          {
+            "activity": "Invoke pipeline1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "libraryVariables": {
+      "VariablesLibrary_LakehouseID": {
+        "type": "String",
+        "variableName": "LakehouseID",
+        "libraryName": "VariablesLibrary"
+      },
+      "VariablesLibrary_WorkspaceID": {
+        "type": "String",
+        "variableName": "WorkspaceID",
+        "libraryName": "VariablesLibrary"
+      },
+      "VariablesLibrary_NotebookID": {
+        "type": "String",
+        "variableName": "NotebookID",
+        "libraryName": "VariablesLibrary"
+      },
+      "VariablesLibrary_FileName": {
+        "type": "String",
+        "variableName": "FileName",
+        "libraryName": "VariablesLibrary"
+      }
+    }
+  }
+}

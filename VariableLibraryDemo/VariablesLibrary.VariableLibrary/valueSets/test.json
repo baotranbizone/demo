@@ -1,0 +1,22 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json",
+  "name": "test",
+  "variableOverrides": [
+    {
+      "name": "WorkspaceID",
+      "value": "848043c6-3903-45b0-82de-3dcb0f24cc09"
+    },
+    {
+      "name": "LakehouseID",
+      "value": "3acbc40f-72c5-4e6f-b7c0-3b18d5c0e19b"
+    },
+    {
+      "name": "NotebookID",
+      "value": "f95d19f2-b292-424a-a7a9-6c877c8120af"
+    },
+    {
+      "name": "FileName",
+      "value": "customers_test.csv"
+    }
+  ]
+}
